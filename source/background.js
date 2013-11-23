@@ -9,7 +9,6 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
 
 	// Prep some variables
 	var sites = [],
-		ideKey = "XDEBUG_ECLIPSE",
 		match = false,
 		domain;
 
@@ -19,11 +18,6 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
 		if (localStorage["sites"])
 		{
 			sites = JSON.parse(localStorage["sites"]);
-		}
-
-		if (localStorage["xdebugIdeKey"])
-		{
-			ideKey = localStorage["xdebugIdeKey"];
 		}
 	}
 
@@ -41,8 +35,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
 		chrome.tabs.sendMessage(
 			tabId,
 			{
-				cmd: "getStatus",
-				idekey: ideKey
+				cmd: "getStatus"
 			},
 			function(response)
 			{
@@ -56,14 +49,6 @@ chrome.commands.onCommand.addListener(function(command)
 {
 	if ('toggle_debug_action' == command)
 	{
-		var ideKey = "XDEBUG_ECLIPSE";
-
-		// Check if localStorage is available and get the settings out of it
-		if (localStorage && localStorage["xdebugIdeKey"])
-		{
-			ideKey = localStorage["xdebugIdeKey"];
-		}
-
 		// Fetch the active tab
 		chrome.tabs.query({ active: true, windowId: chrome.windows.WINDOW_ID_CURRENT }, function(tabs)
 		{
@@ -71,8 +56,7 @@ chrome.commands.onCommand.addListener(function(command)
 			chrome.tabs.sendMessage(
 				tabs[0].id,
 				{
-					cmd: "getStatus",
-					idekey: ideKey
+					cmd: "getStatus"
 				},
 				function(response)
 				{
@@ -83,8 +67,7 @@ chrome.commands.onCommand.addListener(function(command)
 						tabs[0].id,
 						{
 							cmd: "setStatus",
-							status: newState,
-							idekey: ideKey
+							status: newState
 						},
 						function(response)
 						{

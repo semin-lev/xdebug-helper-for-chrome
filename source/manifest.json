@@ -1,8 +1,8 @@
 {
-	"name": "Xdebug helper",
+	"name": "Zend Debug helper",
 	"description": "Easy debugging, profiling and tracing extension for Xdebug",
-	"version": "1.4.2",
-	"author": "Mathijs Kadijk",
+	"version": "1.0.0",
+	"author": "Lev Semin",
 
 	"manifest_version": 2,
 	"minimum_chrome_version": "20",

@@ -1,20 +1,11 @@
 $(function() {
-	var ideKey = "XDEBUG_ECLIPSE";
-
-	// Check if localStorage is available and get the ideKey out of it if any
-	if (localStorage && localStorage["xdebugIdeKey"])
-	{
-		ideKey = localStorage["xdebugIdeKey"];
-	}
-
 	// Request the current state from the active tab
 	chrome.tabs.query({ active: true, windowId: chrome.windows.WINDOW_ID_CURRENT }, function(tabs)
 	{
 		chrome.tabs.sendMessage(
 				tabs[0].id,
 				{
-					cmd: "getStatus",
-					idekey: ideKey
+					cmd: "getStatus"
 				},
 				function(response)
 				{
@@ -35,8 +26,7 @@ $(function() {
 				tabs[0].id,
 				{
 					cmd: "setStatus",
-					status: newStatus,
-					idekey: ideKey
+					status: newStatus
 				},
 				function(response)
 				{

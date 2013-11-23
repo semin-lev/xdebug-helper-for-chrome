@@ -1,9 +1,5 @@
 function save_options()
 {
-	input = document.getElementById("idekey");
-	idekey = input.value;
-	localStorage["xdebugIdeKey"] = idekey;
-
 	siteBox = document.getElementById("siteBox");
 	sites = [];
 	for (i = 0; i < siteBox.length; i++)
@@ -15,24 +11,6 @@ function save_options()
 
 function restore_options()
 {
-	idekey = localStorage["xdebugIdeKey"];
-
-	if (!idekey)
-	{
-		idekey = "XDEBUG_ECLIPSE";
-	}
-
-	if (idekey == "XDEBUG_ECLIPSE" || idekey == "netbeans-xdebug" || idekey == "macgdbp" || idekey == "PHPSTORM")
-	{
-		$("#ide").val(idekey);
-	}
-	else
-	{
-		$("#ide").val("null");
-		$("#customkey").fadeIn();
-	}
-	$('#idekey').val(idekey);
-
 	sites = localStorage["sites"];
 	if (sites)
 	{
@@ -77,23 +55,6 @@ function addItem(id, value)
 
 $(function()
 {
-	$("#ide").change(function ()
-	{
-		if ($("#ide").val() != "null")
-		{
-			$("#customkey").fadeOut();
-			$("#idekey").val($("#ide").val());
-
-			save_options();
-		}
-		else
-		{
-			$("#customkey").fadeIn();
-		}
-	});
-
-	$("#idekey").change(save_options);
-	
 	$('#save-options').click(save_options);
 
 	$('#add-site').click(addSite);
